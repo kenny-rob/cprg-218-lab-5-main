@@ -1,21 +1,152 @@
-/* Sections */
+/* Reset styles */
+body,
+html,
+ul,
+li {
+  margin: 0;
+  padding: 0;
+}
+
+/* Global styles */
+body {
+  font-family: Arial, sans-serif;
+  background-color: #f5f5f5;
+  color: #333;
+  line-height: 1.6;
+}
+
 .container {
-  margin: 3rem auto;
-  max-width: 75rem;
-  padding: 3rem 1.5rem;
-  position: relative;
+  max-width: 800px;
+  margin: 0 auto;
+  padding: 20px;
 }
 
-/* Section Header Content */
 .header-container {
-  background-color: #DDDDDD;
   text-align: center;
-  padding: 6rem 1rem;
+  padding: 30px 0;
+  background-color: #2196F3;
+  color: #fff;
 }
 
-/* Option header */
-.option-container {
-  text-align: center;
-  background-color: #EEEEEE;
-  padding: 3rem 1rem;
+.button {
+  padding: 10px 20px;
+  font-size: 16px;
+  border: none;
+  border-radius: 5px;
+  background-color: #4CAF50;
+  color: #fff;
+  cursor: pointer;
 }
+
+.button:hover {
+  background-color: #45a049;
+}
+
+.card {
+  background-color: #fff;
+  padding: 20px;
+  margin-bottom: 20px;
+  border-radius: 5px;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+.error-card {
+  background-color: #f44336;
+  color: #fff;
+  padding: 20px;
+  border-radius: 5px;
+}
+
+.dropdown {
+  padding: 10px;
+  font-size: 16px;
+}
+
+/* Option container */
+.option-container {
+  background-color: #fff;
+  padding: 20px;
+  margin-bottom: 20px;
+  border-radius: 5px;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+.option-container h2 {
+  color: #333;
+  font-size: 24px;
+  margin-bottom: 10px;
+}
+
+.option-container p {
+  color: #666;
+  font-size: 16px;
+  margin-bottom: 20px;
+}
+
+/* Weather results */
+.card-container {
+  list-style: none;
+}
+
+.card h3 {
+  font-size: 20px;
+  color: #333;
+  margin-bottom: 10px;
+}
+
+.card p {
+  font-size: 16px;
+  color: #666;
+  margin-bottom: 5px;
+}
+
+/* Message container */
+.message-container {
+  padding: 10px;
+  border-radius: 5px;
+}
+
+.success-message-container {
+  background-color: #DFF2BF; /* Light green background for success */
+  border: 1px solid #4F8A10; /* Green border */
+}
+
+.error-message-container {
+  background-color: #F2DEDE; /* Light red background for error */
+  border: 1px solid #D8000C; /* Red border */
+}
+
+.message-text {
+  font-size: 16px;
+  font-weight: bold;
+  text-align: center;
+}
+
+.success-message-text {
+  color: #008000; /* Green color for success */
+}
+
+.error-message-text {
+  color: #FF0000; /* Red color for error */
+}
+
+option.calgary {
+  background-image: url('assets/calgary.jpg');
+  background-size: cover;
+}
+
+option.edmonton {
+  background-image: url('assets/edmonton.jpg');
+  background-size: cover;
+}
+
+option.toronto {
+  background-image: url('assets/toronto.jpg');
+  background-size: cover;
+}
+
+option.new-york {
+  background-image: url('assets/newyork.jpg');
+  background-size: cover;
+}
+
