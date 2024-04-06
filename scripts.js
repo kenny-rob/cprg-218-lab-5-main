@@ -1,207 +1,40 @@
-/**
- * Create one card from item data.
- */
-function createCardElement(item) {
-  return `
-      <li class="card">
-          <img src=${item.image} alt="">
-          <div class="card-content">
-              <p class="subheader">
-                  ${item.subtitle}
-              </p>
-              <h3 class="header">
-                  ${item.title}
-              </h3>
-          </div>
-      </li>
-    `;
-}
+document.addEventListener('DOMContentLoaded', () => {
+  const dropdown = document.getElementById('dropdown');
+  const submitButton = document.getElementById('submit-button');
+  const weatherResults = document.getElementById('weather-results');
 
-/**
- * Create multiple cards from array of item data.
- */
-function createCardElements(data) {
-  return data.map(createCardElement).join("");
-}
+  submitButton.addEventListener('click', async () => {
+    const selectedLocation = dropdown.value;
 
-/**
- * Fetch list of pokemon names and urls.
- */
-async function fetch150PokemonList() {
-  try {
-    // Get a list of Pokemon numbered 0-150
-    const response = await fetch(
-      "https://pokeapi.co/api/v2/pokemon?offset=0&limit=150"
-    );
-    const data = await response.json();
-    return data.results;
-    //Error handling
-  } catch (error) {
-    console.log(error);
-  }
-}
+    // Construct the WeatherStack API endpoint URL with the selected location
+    const weatherStackEndpoint = selectedLocation;
 
-/**
- * Fetch details of a pokemon.
- */
-async function fetchPokemonDetails(url) {
-  try {
-    const response = await fetch(url);
-    const json = await response.json();
-    return json;
-    //Error handling
-  } catch (error) {
-    console.log(error);
-  }
-}
+    try {
+      const response = await fetch(weatherStackEndpoint);
+      const data = await response.json();
 
-/**
- * Fetch details of all 150 pokemon.
- */
-async function fetch150PokemonDetails() {
-  const detailsList = [];
-  for (let i = 1; i <= 150; i++) {
-    const url = `https://pokeapi.co/api/v2/pokemon/${i}`;
-    const data = await fetchPokemonDetails(url);
-    if (data) {
-      detailsList.push(data);
+      // Check if the 'location' and 'current' properties exist in the data object
+      if (data && data.location && data.current) {
+        // Display weather information in a card
+        const { location, current } = data;
+        const weatherCard = `
+          <li class="card">
+            <h3>${location.name}, ${location.country}</h3>
+            <p>Temperature: ${current.temperature}°C</p>
+            <p>Weather: ${current.weather_descriptions[0]}</p>
+          </li>
+        `;
+
+        // Clear previous results and show current weather
+        weatherResults.innerHTML = weatherCard;
+      } else {
+        console.error('Invalid data format received from WeatherStack API:', data);
+        weatherResults.innerHTML = '<li class="error-card">Invalid weather data</li>';
+      }
+    } catch (error) {
+      console.error('Error fetching weather data:', error);
+      weatherResults.innerHTML = '<li class="error-card">Failed to fetch weather data</li>';
     }
-  }
-
-  return detailsList;
-}
-
-/**
- * Option 1
- */
-function renderOption1Results(data) {
-  const card = createCardElement({
-    title: data.name,
-    subtitle: data.types.map((type) => type.type.name).join(", "),
-    image: data.sprites.other["official-artwork"].front_default,
   });
-  document.getElementById("option-1-results").innerHTML = card;
-}
-
-async function option1DropdownClickHandler(event) {
-  const select = document.getElementById("dropdown");
-  const url = select.options[select.selectedIndex].value;
-  const data = await fetchPokemonDetails(url);
-  if (data) {
-    renderOption1Results(data);
-  }
-}
-
-/**
- * Attach an event listener to the submit button for the Option 1 dropdown list.
- */
-const option1SubmitButton = document.getElementById("submit-button");
-option1SubmitButton.addEventListener("click", option1DropdownClickHandler);
-
-/**
- * Populate the dropdown list with pokemon names and their endpoint urls.
- */
-async function renderOption1Dropdown() {
-  const select = document.getElementById("dropdown");
-  const list = await fetch150PokemonList();
-  if (list) {
-    list.forEach((item) => {
-      const option = document.createElement("option");
-      option.textContent = item.name;
-      option.value = item.url;
-      select.appendChild(option);
-    });
-  }
-}
-
-renderOption1Dropdown();
-
-/**
- * Option 2
- */
-async function renderOption2() {
-  const myFavouritePokemon = ["pikachu", "charizard", "ditto", "psyduck"];
-
-  const fetchPokemonData = async (pokemon) => {
-    const url = `https://pokeapi.co/api/v2/pokemon/${pokemon}`;
-    return await fetchPokemonDetails(url);
-  };
-
-  // Map the pokemon names to pokemon data.
-  const pokemonData = await Promise.all(
-    myFavouritePokemon.map(fetchPokemonData)
-  );
-
-  // Map the pokemon data to card data.
-  const cardData = pokemonData.map((itemData) => {
-    return {
-      title: itemData.name,
-      image: itemData.sprites.other["official-artwork"].front_default,
-      subtitle: itemData.types.map((type) => type.type.name).join(", "),
-    };
-  });
-
-  const cards = createCardElements(cardData);
-  document.getElementById("option-2-results").innerHTML = cards;
-}
-
-renderOption2();
-
-/**
- * Option 2 Enhanced
- */
-async function renderOption2Enhanced() {
-  const data = await fetch150PokemonDetails();
-  const cards = createCardElements(
-    data.map((item) => ({
-      title: item.name,
-      image: item.sprites.other["official-artwork"].front_default,
-      subtitle: item.types.map((type) => type.type.name).join(", "),
-    }))
-  );
-  document.getElementById("option-2-enhanced-results").innerHTML = cards;
-}
-
-renderOption2Enhanced();
-
-/**
- * Option 2 Enhanced: Search bar function.
- */
-function searchbarEventHandler() {
-  //Get the value of the input field with id="searchbar"
-  let input = document.getElementById("searchbar").value;
-  input = input.toLowerCase();
-  //Get all the cards
-  const enhancedResults = document.getElementById("option-2-enhanced-results");
-  const card = enhancedResults.getElementsByClassName("card");
-
-  for (i = 0; i < card.length; i++) {
-    //If the value of the input field is not equal to the name of the pokemon, hide the card
-    if (!card[i].innerHTML.toLowerCase().includes(input)) {
-      card[i].style.display = "none";
-      //If the value of the input field is equal to the name of the pokemon, show the card
-    } else {
-      card[i].style.display = "block";
-    }
-  }
-}
-
-const fetch = require('node-fetch');
-
-// Define an endpoint to fetch data from PokeAPI
-app.get('/pokemon', async (req, res) => {
-  try {
-    // Fetch data from PokeAPI
-    const response = await fetch('https://pokeapi.co/api/v2/pokemon/');
-    const data = await response.json();
-    
-    // Send the response data to the client
-    res.json(data);
-  } catch (error) {
-    console.error('Error fetching data from PokeAPI:', error);
-    res.status(500).json({ error: 'Internal Server Error' });
-  }
 });
 
-const searchbar = document.getElementById("searchbar");
-searchbar.addEventListener("keyup", searchbarEventHandler);

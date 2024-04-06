@@ -9,49 +9,35 @@
   <link rel="stylesheet" type="text/css" href="fonts.css">
   <link rel="stylesheet" type="text/css" href="global.css">
   <link rel="stylesheet" type="text/css" href="styles.css">
-  <title>API</title>
+  <!DOCTYPE html>
+<html lang="en">
+  <title>API Integration</title>
 </head>
 
 <body>
   <!-- Heading for the Page -->
   <header class="header-container">
-    <h1>Lab 5</h1>
-    <h2>App displaying card content using API</h2>
+    <h1>Weather API Integration</h1>
+    <h2>Display weather information using WeatherStack API</h2>
   </header>
+  
   <section class="option-1">
     <div class="option-container">
       <h2>Option 1</h2>
       <p>Use a dropdown to change the API endpoint or data</p>
-      <select id="dropdown" class="dropdown"></select>
-      <button id="submit-button" class="button">Submit</button>
+      <select id="dropdown" class="dropdown">
+        <option name="Calgary" value="http://api.weatherstack.com/current?access_key=ae30c1eb933d2855177641014ad3cbf0&query=Calgary">Calgary</option>
+        <option name="Edmonton" value="http://api.weatherstack.com/current?access_key=ae30c1eb933d2855177641014ad3cbf0&query=Edmonton">Edmonton</option>
+        <option name="Toronto" value="http://api.weatherstack.com/current?access_key=ae30c1eb933d2855177641014ad3cbf0&query=Toronto">Toronto</option>
+        <option name="New York" value="http://api.weatherstack.com/current?access_key=ae30c1eb933d2855177641014ad3cbf0&query=New York">New York</option>
+      </select>
+      <button id="submit-button" class="button">Get Weather</button>
     </div>
     <div class="container">
-      <ul id="option-1-results" class="card-container"></ul>
+      <ul id="weather-results" class="card-container"></ul>
     </div>
   </section>
-  <section class="option-2">
-    <div class="option-container">
-      <h2>Option 2</h2>
-      <p>Display a list of cards using the API</p>
-    </div>
-    <div class="container">
-      <ul id="option-2-results" class="card-container"></ul>
-    </div>
-  </section>
-  <section class="option-2-enhanced">
-    <div class="option-container">
-      <h2>Option 2 Enhanced</h2>
-      <p>Add a search box to filter the list of cards.</p>
-      <!--Search box to find content on cards-->
-      <div class="box" style="text-align: center;">
-        <input id="searchbar" class="search" type="text" name="search" placeholder="Search..">
-      </div>
-    </div>
-    <div class="container">
-      <!--Display cards-->
-      <ul id="option-2-enhanced-results" class="card-container"></ul>
-    </div>
-  </section>
+
   <script src="scripts.js" defer></script>
 </body>
 
