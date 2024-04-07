@@ -13,26 +13,29 @@
 </head>
 
 <body>
-  <!-- Heading for the Page --><header>
-        <section class="hero-banner">
-          <div class="hero-image">
-              <img src="styles/assets/hero-image.jpg" alt="line graphs" class="responsive">
-          </div>
-          <div class="hero-text">
-              <h1>Weather API Integration <i class="fa-solid fa-fire" style="color: #d3fcd5;"></i></h1>
-              <p>Displaying weather information using WeatherAPI</p>
-          </div>
-      </section>
-  <section class="option-1">
-    <div class="option-container">
-      <h2>Find Your Current Weather</h2>
-      <p>Use a dropdown to change the API endpoint or data</p>
-      <select id="dropdown" class="dropdown">
-        <option value="Calgary">Calgary</option>
-        <option value="Edmonton">Edmonton</option>
-        <option value="Toronto">Toronto</option>
-        <option value="New York">New York</option>
-      </select>
+  <!-- Heading for the Page -->
+  <header>
+    <section class="hero-banner">
+      <div class="hero-image">
+        <img src="assets/hero-image.jpg" alt="a partly cloudy lake, the sun shines behind an array of clouds."
+          class="hero-image">
+      </div>
+      <div class="hero-text">
+        <h1>Weather API Integration <i class="fa-solid fa-fire" style="color: #d3fcd5;"></i></h1>
+        <p>Displaying weather information using WeatherAPI</p>
+      </div>
+    </section>
+  </header>
+  <div class="custom-select">
+    <select id="dropdown" class="dropdown">
+      <option value="Calgary" data-image="assets/calgary.jpg">Calgary</option>
+      <option value="Edmonton" data-image="assets/edmonton.jpg">Edmonton</option>
+      <option value="Toronto" data-image="assets/toronto.jpg">Toronto</option>
+      <option value="New York" data-image="assets/newyork.jpg">New York</option>
+    </select>
+  </div>
+  
+    
       <button id="submit-button" class="button">Get Weather</button>
     </div>
     <div class="container">
@@ -44,4 +47,5 @@
 </body>
 
 </html>
+
 

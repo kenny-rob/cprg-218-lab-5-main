@@ -28,6 +28,50 @@ body {
   color: #fff;
 }
 
+.hero-banner {
+  position: relative;
+  max-width: 100%;
+  overflow: hidden;
+}
+
+.hero-image {
+  width: 100%;
+  height: auto;
+  display: block;
+}
+
+/* Apply transparent gradient overlay */
+.hero-image::after {
+  content: "";
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  background: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)); /* Adjust the alpha values (0.5 and 0) to change transparency */
+}
+
+.hero-text {
+  position: absolute;
+  top: 50%; /* Center vertically */
+  left: 50%; /* Center horizontally */
+  transform: translate(-50%, -50%); /* Move the element back by 50% of its width and height */
+  text-align: center;
+  width: 100%;
+  color: #fff;
+}
+
+.hero-text h1 {
+  font-size: 36px;
+  margin-bottom: 20px;
+}
+
+.hero-text p {
+  font-size: 18px;
+  margin-bottom: 0;
+}
+
+/* Update button styles */
 .button {
   padding: 10px 20px;
   font-size: 16px;
@@ -42,111 +86,72 @@ body {
   background-color: #45a049;
 }
 
-.card {
-  background-color: #fff;
-  padding: 20px;
-  margin-bottom: 20px;
-  border-radius: 5px;
-  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+/* Style for h2 */
+h2 {
+  font-size: 28px;
+  color: #333;
+  margin-bottom: 15px;
 }
 
-.error-card {
-  background-color: #f44336;
-  color: #fff;
-  padding: 20px;
-  border-radius: 5px;
+/* Style for h3 */
+h3 {
+  font-size: 24px;
+  color: #555;
+  margin-bottom: 10px;
 }
 
-.dropdown {
-  padding: 10px;
-  font-size: 16px;
-}
-
-/* Option container */
+/* Style for option container */
 .option-container {
   background-color: #fff;
   padding: 20px;
   margin-bottom: 20px;
-  border-radius: 5px;
-  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+  border-radius: 8px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
 }
 
+/* Style for option container title */
 .option-container h2 {
-  color: #333;
   font-size: 24px;
-  margin-bottom: 10px;
-}
-
-.option-container p {
-  color: #666;
-  font-size: 16px;
-  margin-bottom: 20px;
-}
-
-/* Weather results */
-.card-container {
-  list-style: none;
-}
-
-.card h3 {
-  font-size: 20px;
   color: #333;
   margin-bottom: 10px;
 }
 
-.card p {
+/* Style for option container paragraph */
+.option-container p {
   font-size: 16px;
   color: #666;
-  margin-bottom: 5px;
+  margin-bottom: 15px;
 }
 
-/* Message container */
-.message-container {
-  padding: 10px;
+/* Custom select dropdown */
+.custom-select {
+  position: relative;
+  width: 200px;
+  overflow: hidden;
   border-radius: 5px;
+  border: 1px solid #ccc;
+  background-color: #fff;
 }
 
-.success-message-container {
-  background-color: #DFF2BF; /* Light green background for success */
-  border: 1px solid #4F8A10; /* Green border */
-}
-
-.error-message-container {
-  background-color: #F2DEDE; /* Light red background for error */
-  border: 1px solid #D8000C; /* Red border */
-}
-
-.message-text {
+.custom-select select {
+  appearance: none;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  width: 100%;
+  padding: 10px;
   font-size: 16px;
-  font-weight: bold;
-  text-align: center;
+  color: #333;
+  cursor: pointer;
 }
 
-.success-message-text {
-  color: #008000; /* Green color for success */
-}
-
-.error-message-text {
-  color: #FF0000; /* Red color for error */
-}
-
-option.calgary {
-  background-image: url('assets/calgary.jpg');
-  background-size: cover;
-}
-
-option.edmonton {
-  background-image: url('assets/edmonton.jpg');
-  background-size: cover;
-}
-
-option.toronto {
-  background-image: url('assets/toronto.jpg');
-  background-size: cover;
-}
-
-option.new-york {
-  background-image: url('assets/newyork.jpg');
-  background-size: cover;
+/* Custom dropdown arrow */
+.custom-select::after {
+  content: '\25BC'; /* Unicode down arrow */
+  position: absolute;
+  top: 50%;
+  right: 10px;
+  transform: translateY(-50%);
+  font-size: 16px;
+  color: #666;
 }
 
